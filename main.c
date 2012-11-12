@@ -3,7 +3,8 @@
 #include<string.h>
 #include "tipos.c"
 #include "fila.c"
-#include "lista.c"
+#include "lprioridade.c"
+#include "lusuario.c"
 #include "base.c"
 
 
