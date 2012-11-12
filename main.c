@@ -7,6 +7,71 @@
 #include "base.c"
 
 
+int run_rootcmd(TBase * base, char * cmd){
+  
+  TUser * user = get_user(base->users,"root");
+
+  Task * task = create_task(user, base->pid++, 0, cmd);
+  spool(base,task);
+  
+  return 1;
+}
+
+int run_usercmd(TBase * base, char * cmd){
+  int i, j, value = 0;
+  
+  char end = '\0';
+  char u[120] = "", p[120] = "", c[120] = "";
+  
+  for(i = 0, j = 0; cmd[i] != end; i++, j++){  
+    if(cmd[i] == ':' && value < 2){
+      value++;
+      j = -1;
+    }else{
+      if(value == 0){
+	u[j] = cmd[i];
+	u[j+1] = end;
+      }
+      if(value == 1){
+	p[j] = cmd[i];
+	p[j+1] = end;
+      }
+      if(value == 2){
+	c[j] = cmd[i];
+	c[j+1] = end;	
+      }
+    }
+  }
+  
+  if(value != 2 || u[0] == '\0' || p[0] == '\0' || c[0] == '\0')
+    return 0;
+  
+  for(j = 0; p[j] != end; j++){//somente valores positivos
+    if(p[j] == '-' || p[j] < '0' || p[j] > '9'){
+      printf("somente prioridade inteira positiva!\n");
+      return 0;     
+    }    
+  }
+  
+  if(!base)
+    return 1;
+  
+  int priority;
+  
+  sscanf(p,"%i",&priority);
+  
+  TUser * user = set_user(base->users,u);
+
+  Task * task = create_task(user, base->pid++, priority, c);
+  spool(base,task);
+  
+  return 1;
+}
+
+int check_user_cmd(char * cmd){
+  return run_usercmd(NULL,cmd);
+}
+
 int command(char * cmd, TBase * base){
   char command[120];
   char arg[120];
@@ -14,23 +79,22 @@ int command(char * cmd, TBase * base){
   sscanf(cmd,"%[^ ] %s",command,arg);
    
   if(!strcmp("load",command)) 
-    printf("load");
+    printf("load\n");
   
   else if(!strcmp("print",command))
-    printf("print");
+    printf("print\n");
   
   else if(!strcmp("exit",command)){
-    printf("exit");
+    printf("exit\n");
     return 0;
   }
   
-  else if(!strcmp("exec",command))
-    printf("exec");
+  else if(check_user_cmd(command))
+    run_usercmd(base,command);
   
   else
-    printf("comando desconhecido");
+    run_rootcmd(base,cmd);
   
-  printf("\n");
   return 1;
 }
 
@@ -39,10 +103,16 @@ int main(void){
   char input[120];
   int loop = 1;
   
+  while(loop){
+    scanf(" %[^\n]s", input);
+    loop = command(input,base);
+  }
   
-  scanf("%[^\n]s", input);
-  loop = command(input,base);
+  printf("\n");
+  print_waiting(base);
   
+  print_fu(base);
+
   return(0); 
 }
 

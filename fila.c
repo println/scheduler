@@ -1,3 +1,16 @@
+void printq(TQueue * q){
+  if(emptyq(q))
+    return;
+  
+  TNode * acc = q->begin;
+  while(acc){
+    Task * task = acc->info;
+    printf("%d:%d:%s", task->pid,task->priority,task->cmd);
+    acc = acc->next;
+    if(acc)
+      printf(" - ");
+  }
+}
 
 void releaseq(TQueue * q){
   TNode * acc = q->begin, * temp;

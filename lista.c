@@ -1,30 +1,64 @@
-void waiting_for(Task * task){
-  TUser * user = task->owner;
-  push(user->waiting,task);
-}
-
-void to_done(Task * task){
-  TUser * user = task->owner;
-  TQueue * q = initializeq();
-  while(!emptyq(user->waiting)){
-    Task * tmp = pop(user->waiting); 
-    if(tmp != task)
-      push(q,tmp);
+PriorityList * create_priority(PriorityList * plist, int priority){//insere ordenado
+  PriorityList * item = (PriorityList*)malloc(sizeof(PriorityList));
+  
+  item->priority = priority;
+  item->tasks = initializeq();
+  item->next = NULL;
+  
+  if(!plist)
+    return item;
+  
+  PriorityList * tmp = plist;
+  PriorityList * ant;
+  while(tmp && tmp->priority <= priority){
+    ant = tmp;
+    tmp = tmp->next;    
   }
   
-  releaseq(user->waiting);
-  user->waiting = q;
+  if(ant){
+    ant->next = item;
+    item->next = tmp;
+  }else
+    item->next = tmp;
   
-  push(user->done,task);
-  
+  return item;  
 }
+
+PriorityList * get_priority( PriorityList *plist, int priority){
+ 
+  PriorityList * tmp = plist;
+  
+  while(tmp){
+    if(tmp->priority == priority)
+      return tmp;
+    tmp = tmp->next;
+  }
+  
+  return NULL;
+}
+
+PriorityList * set_priority(PriorityList * plist, int priority){
+  if(!plist)
+    return NULL;
+    
+  PriorityList * user = get_priority(plist,priority);
+  if(!user)
+    user = create_priority(plist,priority);
+  
+  return user;    
+}
+
+PriorityList * initialize_prioritylist(void){
+  return create_priority(NULL,-1);
+}
+
 
 TUser * create_user(TUser * ulist, char * name, int grant){
   TUser * user = (TUser*)malloc(sizeof(TUser));
   
   strcpy(user->id,name);
   user->grant = grant;
-  user->waiting= initializeq();
+  user->waiting= initialize_prioritylist();
   user->done= initializeq();
   user->next = NULL;
   
@@ -40,7 +74,7 @@ TUser * create_user(TUser * ulist, char * name, int grant){
   return user;
 }
 
-TUser * search_user( TUser *ulist, char *name){
+TUser * get_user( TUser *ulist, char *name){
   if(!name)
     return NULL;
   
@@ -55,11 +89,11 @@ TUser * search_user( TUser *ulist, char *name){
   return NULL;
 }
 
-TUser * get_user(TUser * ulist, char * name){
+TUser * set_user(TUser * ulist, char * name){
   if(!ulist || !name)
     return NULL;
     
-  TUser * user = search_user(ulist,name);
+  TUser * user = get_user(ulist,name);
   if(!user)
     user = create_user(ulist,name,1);
   

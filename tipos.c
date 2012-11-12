@@ -1,15 +1,16 @@
 typedef struct user{
   char id[80];
   int grant;
-  struct queue * waiting;
+  struct scheduler * waiting;
   struct queue * done;
   struct user * next;
 }TUser;
 
 typedef struct scheduler{
   int priority;
+  struct queue * tasks;
   struct scheduler * next;
-}TScheduler;
+}TScheduler, PriorityList;
 
 typedef struct task{
   TUser * owner;
