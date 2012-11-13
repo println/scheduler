@@ -12,12 +12,12 @@
 extern "C" {
 #endif
 
-TUser * create_user(TUser * ulist, char * name, int grant);
+TUser * _createu(TUser * ulist, char * name, int grant);
 
-TUser * get_user( TUser *ulist, char *name);
-TUser * set_user(TUser * ulist, char * name);
+TUser * finduser( TUser *ulist, char *name);
+TUser * adduser(TUser * ulist, char * name);
 
-TUser * initialize_userlist(void);
+TUser * initializeuser(void);
 
 
 #ifdef	__cplusplus

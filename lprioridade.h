@@ -11,14 +11,15 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
-PriorityList * create_priority(PriorityList * plist, int priority);
+PriorityList * _createp(PriorityList * plist, int priority);
 
-PriorityList * get_priority( PriorityList *plist, int priority);
+PriorityList * searchp( PriorityList *plist, int priority);
 
-PriorityList * set_priority(PriorityList * plist, int priority);
-PriorityList * initialize_prioritylist(void);
+PriorityList * insertp(PriorityList * plist, int priority);
 
+PriorityList * initializep(void);
 
+int emptyp(PriorityList * plist);
 
 
 

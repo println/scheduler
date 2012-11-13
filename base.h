@@ -20,7 +20,7 @@ void waiting_for(Task * task);
 
 void to_done(Task * task);
 
-Task * create_task(TUser * user, int pid, int priority, char * cmd);
+Task * newtask(TUser * user, int pid, int priority, char * cmd);
 
 void spool(TBase * base, Task * task);
 

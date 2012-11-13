@@ -9,23 +9,24 @@
 TBase * start_base(void){
   TBase * base = (TBase*)malloc(sizeof(TBase));
   base->pid = 1;
-  base->users = initialize_userlist();
+  base->users = initializeuser();
   base->FE = initializeq();
   base->FTR = initializeq();
-  base->scheduler = initialize_prioritylist();
+  base->FPSO = initializeq();
+  base->scheduler = initializep();
   
   return base;
 }
 
 void waiting_for(Task * task){
   TUser * user = task->owner;
-  PriorityList * plist = set_priority(user->waiting,task->priority);
+  PriorityList * plist = insertp(user->waiting,task->priority);
   push(plist->tasks,task);
 }
 
 void to_done(Task * task){
   TUser * user = task->owner;
-  PriorityList * plist = get_priority(user->waiting,task->priority);
+  PriorityList * plist = searchp(user->waiting,task->priority);
   TQueue * q = initializeq();
   
   while(plist && plist->priority != task->priority)
@@ -44,7 +45,7 @@ void to_done(Task * task){
   
 }
 
-Task * create_task(TUser * user, int pid, int priority, char * cmd){
+Task * newtask(TUser * user, int pid, int priority, char * cmd){
     
   Task * n = (Task*)malloc(sizeof(Task));
   

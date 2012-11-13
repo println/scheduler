@@ -8,9 +8,9 @@
 
 int run_rootcmd(TBase * base, char * cmd){
   
-  TUser * user = get_user(base->users,"root");
+  TUser * user = finduser(base->users,"root");
 
-  Task * task = create_task(user, base->pid++, 0, cmd);
+  Task * task = newtask(user, base->pid++, 0, cmd);
   spool(base,task);
   
   return 1;
@@ -59,9 +59,9 @@ int run_usercmd(TBase * base, char * cmd){
   
   sscanf(p,"%i",&priority);
   
-  TUser * user = set_user(base->users,u);
+  TUser * user = adduser(base->users,u);
 
-  Task * task = create_task(user, base->pid++, priority, c);
+  Task * task = newtask(user, base->pid++, priority, c);
   spool(base,task);
   
   return 1;

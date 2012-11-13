@@ -1,12 +1,12 @@
 /* 
- * File:   tipos.h
+ * File:   filas.h
  * Author: proto
  *
- * Created on 12 de Novembro de 2012, 23:37
+ * Created on 13 de Novembro de 2012, 11:49
  */
 
-#ifndef TIPOS_H
-#define	TIPOS_H
+#ifndef FILAS_H
+#define	FILAS_H
 
 #ifdef	__cplusplus
 extern "C" {
@@ -48,13 +48,15 @@ typedef struct base{
   TUser * users;		//LISTA de usuarios
   TQueue * FE;			//FILA de processos inicias
   TQueue * FTR;
+  TQueue * FPSO;
   TScheduler * scheduler;	//LISTA do escalonador
 }TBase;
+
 
 
 #ifdef	__cplusplus
 }
 #endif
 
-#endif	/* TIPOS_H */
+#endif	/* FILAS_H */
 
