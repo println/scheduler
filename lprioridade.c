@@ -1,3 +1,9 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include"tipos.h"
+#include"fila.h"
+
 PriorityList * create_priority(PriorityList * plist, int priority){//insere ordenado
   PriorityList * item = (PriorityList*)malloc(sizeof(PriorityList));
   

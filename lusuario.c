@@ -1,3 +1,10 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include"tipos.h"
+#include"fila.h"
+#include"lprioridade.h"
+
 TUser * create_user(TUser * ulist, char * name, int grant){
   TUser * user = (TUser*)malloc(sizeof(TUser));
   

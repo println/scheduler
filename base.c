@@ -1,8 +1,17 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include"tipos.h"
+#include"fila.h"
+#include"lprioridade.h"
+#include"lusuario.h"
+
 TBase * start_base(void){
   TBase * base = (TBase*)malloc(sizeof(TBase));
   base->pid = 1;
   base->users = initialize_userlist();
-  base->fu = initializeq();
+  base->FE = initializeq();
+  base->FTR = initializeq();
   base->scheduler = initialize_prioritylist();
   
   return base;
@@ -45,12 +54,12 @@ Task * create_task(TUser * user, int pid, int priority, char * cmd){
   strcpy(n->cmd,cmd);
   
   waiting_for(n);
-
+  printf("ID: %d\n", pid);
   return n;
 }
 
 void spool(TBase * base, Task * task){
-  push(base->fu,task);
+  push(base->FE,task);
 }
 
 void printform_tasks(TQueue * q){
@@ -104,6 +113,6 @@ void print_done(TBase * base){
 
 void print_fu(TBase * base){
   printf("FU -> ");
-  printq(base->fu);
+  printq(base->FE);
   printf("\n");
 }

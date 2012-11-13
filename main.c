@@ -1,12 +1,10 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include "tipos.c"
-#include "fila.c"
-#include "lprioridade.c"
-#include "lusuario.c"
-#include "base.c"
-
+#include"base.h"
+#include"fila.h"
+#include"lprioridade.h"
+#include"lusuario.h"
 
 int run_rootcmd(TBase * base, char * cmd){
   

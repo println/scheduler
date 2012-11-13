@@ -1,3 +1,7 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include"tipos.h"
+
 void printq(TQueue * q){
   if(emptyq(q))
     return;

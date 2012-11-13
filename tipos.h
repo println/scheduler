@@ -1,3 +1,17 @@
+/* 
+ * File:   tipos.h
+ * Author: proto
+ *
+ * Created on 12 de Novembro de 2012, 23:37
+ */
+
+#ifndef TIPOS_H
+#define	TIPOS_H
+
+#ifdef	__cplusplus
+extern "C" {
+#endif
+
 typedef struct user{
   char id[80];
   int grant;
@@ -32,6 +46,15 @@ typedef struct queue{
 typedef struct base{
   unsigned int pid;		//id para o prox processo
   TUser * users;		//LISTA de usuarios
-  TQueue * fu;			//FILA de processos inicias
+  TQueue * FE;			//FILA de processos inicias
+  TQueue * FTR;
   TScheduler * scheduler;	//LISTA do escalonador
 }TBase;
+
+
+#ifdef	__cplusplus
+}
+#endif
+
+#endif	/* TIPOS_H */
+
