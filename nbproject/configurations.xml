@@ -8,6 +8,7 @@
       <itemPath>fila.h</itemPath>
       <itemPath>lprioridade.h</itemPath>
       <itemPath>lusuario.h</itemPath>
+      <itemPath>tarefa.h</itemPath>
       <itemPath>tipos.h</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
@@ -18,6 +19,7 @@
       <itemPath>lprioridade.c</itemPath>
       <itemPath>lusuario.c</itemPath>
       <itemPath>main.c</itemPath>
+      <itemPath>tarefa.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Arquivos de Recurso"

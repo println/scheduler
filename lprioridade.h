@@ -11,15 +11,15 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
-PriorityList * _createp(PriorityList * plist, int priority);
 
-PriorityList * searchp( PriorityList *plist, int priority);
-
-PriorityList * insertp(PriorityList * plist, int priority);
 
 PriorityList * initializep(void);
 
 int emptyp(PriorityList * plist);
+
+void addtask(PriorityList * plist, Task * task);
+
+Task * toptask(PriorityList * plist);
 
 
 

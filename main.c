@@ -6,14 +6,25 @@
 #include"lprioridade.h"
 #include"lusuario.h"
 
-int run_rootcmd(TBase * base, char * cmd){
-  
-  TUser * user = finduser(base->users,"root");
+int run_exec(TBase * base){
+    Task * task = NULL;
+    if(!emptyq(base->FTR))
+        task = pop(base->FTR);
+    else if(!emptyp(base->FU))
+        task = toptask(base->FU);
+    
+    if(task)
+        return execute(task);
+    
+    return 0;
+}
+int run_execall(TBase * base){
+    while(!emptyq(base->FTR) || !emptyp(base->FU))
+        run_exec(base);
+}
 
-  Task * task = newtask(user, base->pid++, 0, cmd);
-  spool(base,task);
-  
-  return 1;
+int run_prepare(TBase * base){
+    arrange(base);
 }
 
 int run_usercmd(TBase * base, char * cmd){
@@ -58,11 +69,10 @@ int run_usercmd(TBase * base, char * cmd){
   int priority;
   
   sscanf(p,"%i",&priority);
-  
-  TUser * user = adduser(base->users,u);
 
-  Task * task = newtask(user, base->pid++, priority, c);
-  spool(base,task);
+  unsigned int pid = newtask(base, u, priority, c);
+  
+  printf("ID: %d\n", pid);
   
   return 1;
 }
@@ -80,19 +90,24 @@ int command(char * cmd, TBase * base){
   if(!strcmp("load",command)) 
     printf("load\n");
   
-  else if(!strcmp("print",command))
-    printf("print\n");
-  
+  else if(!strcmp("make",command)){
+    run_prepare(base);
+  }
+  else if(!strcmp("run",command)){
+    run_exec(base);
+  }
+  else if(!strcmp("runall",command)){
+    run_execall(base);
+  }
   else if(!strcmp("exit",command)){
-    printf("exit\n");
     return 0;
   }
   
-  else if(check_user_cmd(command))
-    run_usercmd(base,command);
+  else if(check_user_cmd(cmd))
+    run_usercmd(base,cmd);
   
   else
-    run_rootcmd(base,cmd);
+    printf("comando inexistente\n");
   
   return 1;
 }
@@ -110,7 +125,7 @@ int main(void){
   printf("\n");
   print_waiting(base);
   
-  print_fu(base);
+  print_fe(base);
 
   return(0); 
 }

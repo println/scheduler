@@ -16,6 +16,17 @@ void printq(TQueue * q){
   }
 }
 
+void dropq(TQueue * q){
+  TNode * acc = q->begin, * temp;
+  while(acc){
+    temp = acc;
+    acc = acc->next;
+    temp->info = NULL;
+    free(temp);
+  }
+  free(q);
+}
+
 void releaseq(TQueue * q){
   TNode * acc = q->begin, * temp;
   while(acc){

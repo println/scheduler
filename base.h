@@ -20,8 +20,6 @@ void waiting_for(Task * task);
 
 void to_done(Task * task);
 
-Task * newtask(TUser * user, int pid, int priority, char * cmd);
-
 void spool(TBase * base, Task * task);
 
 void printform_tasks(TQueue * q);
@@ -36,7 +34,7 @@ void print_waiting(TBase * base);
 
 void print_done(TBase * base);
 
-void print_fu(TBase * base);
+void print_fe(TBase * base);
 
 
 

@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/lprioridade.o \
+	${OBJECTDIR}/tarefa.o \
 	${OBJECTDIR}/fila.o \
 	${OBJECTDIR}/lusuario.o \
 	${OBJECTDIR}/main.o \
@@ -70,6 +71,11 @@ ${OBJECTDIR}/lprioridade.o: lprioridade.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/lprioridade.o lprioridade.c
+
+${OBJECTDIR}/tarefa.o: tarefa.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/tarefa.o tarefa.c
 
 ${OBJECTDIR}/fila.o: fila.c 
 	${MKDIR} -p ${OBJECTDIR}

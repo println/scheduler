@@ -42,7 +42,7 @@ TUser * finduser( TUser *ulist, char *name){
 }
 
 TUser * adduser(TUser * ulist, char * name){
-  if(!ulist || !name)
+  if(!name)
     return NULL;
     
   TUser * user = finduser(ulist,name);
@@ -53,5 +53,6 @@ TUser * adduser(TUser * ulist, char * name){
 }
 
 TUser * initializeuser(void){
-  return _createu(NULL,"root",0);
+  return NULL;
 }
+

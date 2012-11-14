@@ -12,8 +12,6 @@
 extern "C" {
 #endif
 
-TUser * _createu(TUser * ulist, char * name, int grant);
-
 TUser * finduser( TUser *ulist, char *name);
 TUser * adduser(TUser * ulist, char * name);
 
