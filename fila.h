@@ -17,6 +17,7 @@ extern "C" {
 void printq(TQueue * q);
 
 void releaseq(TQueue * q);
+void dropq(TQueue * q);
 
 TQueue * initializeq(void);
 

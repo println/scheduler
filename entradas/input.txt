@@ -1,0 +1,15 @@
+rosseti:0:ls -la
+boeres:1:mkdir xxx
+celso:0:pwd
+loana:1:vi novo.txt
+loana:1:clear
+loana:2:clear
+loana:3:clear
+celso:0:pwd
+loana:0:rm novo.txt
+simone:1:echo oi
+boeres:1: rm xxx
+loana:1:clear
+simone:1:echo oi
+
+

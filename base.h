@@ -16,27 +16,23 @@ extern "C" {
 
 TBase * start_base(void);
 
-void waiting_for(Task * task);
-
-void to_done(Task * task);
-
-void spool(TBase * base, Task * task);
+void arrange(TBase * base);
 
 void printform_tasks(TQueue * q);
 
-void printform_user(char * name,TQueue * q);
+void printform_user(char * name, TQueue * q);
 
-void printform_priority(int priority,TQueue * q);
+void printform_priority(int priority, TQueue * q);
 
-void printform_userpriority(char * name,PriorityList * plist);
-
-void print_waiting(TBase * base);
-
-void print_done(TBase * base);
+void printform_prioritylist(PriorityList * plist);
 
 void print_fe(TBase * base);
 
+void print_user(TUser * user);
 
+void print_users(TBase * base);
+
+void print_ok();
 
 #ifdef	__cplusplus
 }

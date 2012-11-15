@@ -6,6 +6,7 @@
 #include"lprioridade.h"
 #include"lusuario.h"
 #include"tarefa.h"
+#include "base.h"
 
 TBase * start_base(void) {
     TBase * base = (TBase*) malloc(sizeof (TBase));
@@ -29,80 +30,49 @@ void arrange(TBase * base) {
     }
 }
 
-//void waiting_for(Task * task){
-//  TUser * user = task->owner;
-//  PriorityList * plist = _insert(user->waiting,task->priority);
-//  push(plist->tasks,task);
-//}
-
-//void to_done(Task * task){
-//  TUser * user = task->owner;
-//  PriorityList * plist = _contains(user->waiting,task->priority);
-//  TQueue * q = initializeq();
-//  
-//  while(plist && plist->priority != task->priority)
-//   plist = plist->next;
-//  
-//  while(plist && !emptyq(plist->tasks)){
-//    Task * tmp = pop(plist->tasks); 
-//    if(tmp != task)
-//      push(q,tmp);
-//  }
-//  
-//  releaseq(plist->tasks);
-//  plist->tasks = q;
-//  
-//  push(user->done,task);
-//  
-//}
-
-//void spool(TBase * base, Task * task){
-//  push(base->FE,task);
-//}
-
 void printform_tasks(TQueue * q) {
     if (!emptyq(q)) {
         printf(" -> ");
         printq(q);
+        printf("\n");
     }
 }
 
 void printform_user(char * name, TQueue * q) {
     printf("%s", name);
     printform_tasks(q);
-    printf("\n");
 }
 
 void printform_priority(int priority, TQueue * q) {
     printf("|-%i", priority);
     printform_tasks(q);
-    printf("\n");
 }
 
-void printform_userpriority(char * name, PriorityList * plist) {
-    printf("%s", name);
+void printform_prioritylist(PriorityList * plist) {
     TPriority * tmp = plist->priorities;
-    printf("\n");
     while (tmp) {
         printform_priority(tmp->priority, tmp->tasks);
         tmp = tmp->next;
     }
-    printf("\n");
 }
 
-void print_waiting(TBase * base) {
-    TUser * user = base->users;
-
-    while (user) {
-        printform_userpriority(user->id, user->waiting);
-        user = user->next;
+void print_user(TUser * user) {
+    printf("*%s\n", user->id);
+    if (!emptyp(user->waiting)) {
+        printf("Nao executados:\n");
+        printform_prioritylist(user->waiting);
     }
+    if (!emptyq(user->done)) {
+        printf("Executados:");
+        printform_tasks( user->done);
+    }
+    printf("-----------------\n");
 }
 
-void print_done(TBase * base) {
+void print_users(TBase * base) {
     TUser * user = base->users;
     while (user) {
-        printform_user(user->id, user->done);
+        print_user(user);
         user = user->next;
     }
 }
@@ -111,4 +81,17 @@ void print_fe(TBase * base) {
     printf("FE -> ");
     printq(base->FE);
     printf("\n");
+}
+
+void print_ftr(TBase * base) {
+    printf("FTR -> ");
+    printq(base->FTR);
+    printf("\n");
+}
+
+void print_fu(TBase * base) {
+    printf("FU");
+    if(!emptyp(base->FU))
+        printf("\n");
+    printform_prioritylist(base->FU);
 }
