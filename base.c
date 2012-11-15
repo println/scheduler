@@ -100,6 +100,7 @@ void print_fu(TBase * base) {
     if(!emptyp(base->FU))
         printf("\n");
     printform_prioritylist(base->FU);
+    printf("\n");
 }
 
 void freebase(TBase * base){
