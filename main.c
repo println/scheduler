@@ -48,7 +48,10 @@ void run_print(TBase * base, char * cmd) {
 
     else if (!strcmp("fu", command))
         print_fu(base);
-
+    
+    else if (!strcmp("fpso", command))
+        print_fpso(base);
+    
     else if (!strcmp("fe", command))
         print_fe(base);
 
@@ -70,8 +73,10 @@ int run_exec(TBase * base) {
     else if (!emptyp(base->FU))
         task = toptask(base->FU);
 
-    if (task)
+    if (task){
+        push(base->FPSO,task);
         return execute(task);
+    }
 
     return 0;
 }
@@ -186,9 +191,14 @@ int main(void) {
     print_fe(base);
 
     print_ftr(base);
-
+    
     print_fu(base);
-
+    
+    print_fpso(base);
+    
+    freebase(base);
+    free(base);
+    
     return (0);
 }
 

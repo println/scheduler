@@ -68,7 +68,23 @@ void _insert(PriorityList * plist, Task * task) {//insere ordenado
     }
 }
 
-void * _removepriority(PriorityList * plist, TPriority * prio) {
+void _destroy(PriorityList * plist, int destroytask) {
+    TPriority * prio = plist->priorities;
+    while (prio) {
+        TPriority * tmp = prio;
+        prio = prio->next;
+        
+        if (destroytask)
+            releaseq(tmp->tasks);
+        else
+            dropq(tmp->tasks);
+        
+        free(tmp);
+    }
+    free(plist);
+}
+
+void _removepriority(PriorityList * plist, TPriority * prio) {
     if (!prio || !plist)
         return;
 
@@ -149,5 +165,12 @@ Task * toptask(PriorityList * plist) {
     }
     return NULL;
 
+}
+
+void dropp(PriorityList * plist) {
+    _destroy(plist,0);
+}
+void releasep(PriorityList * plist) {
+    _destroy(plist,1);
 }
 

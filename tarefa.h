@@ -13,7 +13,8 @@ extern "C" {
 #endif
     
 int execute(Task * task);
-Task * newtask(TUser * user, int pid, int priority, char * cmd);
+
+int newtask(TBase * base, char * username, int priority, char * cmd);
 
 
 #ifdef	__cplusplus

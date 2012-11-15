@@ -89,9 +89,23 @@ void print_ftr(TBase * base) {
     printf("\n");
 }
 
+void print_fpso(TBase * base) {
+    printf("FPSO -> ");
+    printq(base->FPSO);
+    printf("\n");
+}
+
 void print_fu(TBase * base) {
     printf("FU");
     if(!emptyp(base->FU))
         printf("\n");
     printform_prioritylist(base->FU);
+}
+
+void freebase(TBase * base){
+    dropq(base->FE);
+    dropq(base->FPSO);
+    dropq(base->FTR);
+    dropp(base->FU);
+    releaseu(base->users);
 }

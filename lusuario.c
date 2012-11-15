@@ -5,11 +5,10 @@
 #include"fila.h"
 #include"lprioridade.h"
 
-TUser * _createu(TUser * ulist, char * name, int grant){
+TUser * _createu(TUser * ulist, char * name){
   TUser * user = (TUser*)malloc(sizeof(TUser));
   
   strcpy(user->id,name);
-  user->grant = grant;
   user->waiting= initializep();
   user->done= initializeq();
   user->next = NULL;
@@ -47,12 +46,22 @@ TUser * adduser(TUser * ulist, char * name){
     
   TUser * user = finduser(ulist,name);
   if(!user)
-    user = _createu(ulist,name,1);
+    user = _createu(ulist,name);
   
   return user;    
 }
 
 TUser * initializeuser(void){
   return NULL;
+}
+
+void releaseu(TUser * user){
+    
+    while(user){
+       TUser * u = user;       
+       user = user->next;
+       releasep(u->waiting);
+       free(u);
+    }
 }
 

@@ -14,7 +14,6 @@ extern "C" {
 
     typedef struct user {
         char id[80];
-        int grant;
         struct prioritylist * waiting;
         struct queue * done;
         struct user * next;

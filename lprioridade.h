@@ -21,7 +21,9 @@ void addtask(PriorityList * plist, Task * task);
 
 Task * toptask(PriorityList * plist);
 
+void dropp(PriorityList * plist);
 
+void releasep(PriorityList * plist);
 
 #ifdef	__cplusplus
 }

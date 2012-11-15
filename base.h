@@ -14,25 +14,42 @@ extern "C" {
 
 #include"tipos.h"
 
-TBase * start_base(void);
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include"tipos.h"
+#include"fila.h"
+#include"lprioridade.h"
+#include"lusuario.h"
+#include"tarefa.h"
+#include "base.h"
 
-void arrange(TBase * base);
+    TBase * start_base(void);
 
-void printform_tasks(TQueue * q);
+    void arrange(TBase * base);
 
-void printform_user(char * name, TQueue * q);
+    void printform_tasks(TQueue * q);
 
-void printform_priority(int priority, TQueue * q);
+    void printform_user(char * name, TQueue * q);
 
-void printform_prioritylist(PriorityList * plist);
+    void printform_priority(int priority, TQueue * q);
 
-void print_fe(TBase * base);
+    void printform_prioritylist(PriorityList * plist);
 
-void print_user(TUser * user);
+    void print_user(TUser * user);
 
-void print_users(TBase * base);
+    void print_users(TBase * base);
 
-void print_ok();
+    void print_fe(TBase * base);
+
+    void print_ftr(TBase * base);
+
+    void print_fpso(TBase * base);
+
+    void print_fu(TBase * base);
+
+    void freebase(TBase * base);
+
 
 #ifdef	__cplusplus
 }

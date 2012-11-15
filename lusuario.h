@@ -13,10 +13,12 @@ extern "C" {
 #endif
 
 TUser * finduser( TUser *ulist, char *name);
+
 TUser * adduser(TUser * ulist, char * name);
 
 TUser * initializeuser(void);
 
+void releaseu(TUser * user);
 
 #ifdef	__cplusplus
 }
