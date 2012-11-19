@@ -134,7 +134,9 @@ int run_usercmd(TBase * base, char * cmd) {
     sscanf(p, "%i", &priority);
 
     unsigned int pid = newtask(base, u, priority, c);
-
+    
+    printf("ID: %d\n", pid);
+    
     return 1;
 }
 
