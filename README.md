@@ -1,4 +1,6 @@
 scheduler
 =========
+A prototype task scheduler to academic study
 
-Protótipo de escalonador de tarefas em c
+### Tecnology
+- C
